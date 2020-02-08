@@ -145,6 +145,7 @@ class ProductController extends Controller
                     ->select('products.id','products.name','products.description')
                     ->join('products_categories','products.id','=','products_categories.product_id')
                     ->join('categories','products_categories.category_id','=','categories.id')
+                    ->whereNull('products.deleted_at')
                     ->groupBy('products.id','products.name','products.description');
         if (!empty($name) && !empty($selected_cat)) {
             $query->where('products.name','like','%'.$name.'%');
